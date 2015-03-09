@@ -1,1 +1,78 @@
+# You can place the script of your game in this file.
+
+# Declare images below this line, using the image statement.
+# eg. image eileen happy = "eileen_happy.png"
+image map="sudanmap.jpg"
+
+# Declare characters used by this game.
+define y = Character("[name]", color="#c8ffc8")
+define d = Character("Default")
+define f=Character("Farmer")
+
+
+# The game starts here.
+label start:
+    
+    # add in char selection later
+    
+    python:
+        name = renpy.input("Enter your name: ")
+        i = renpy.input("So, your name is... [name]?")
+        
+        # turn into a while false loop?
+        if i == "no":
+            y = renpy.input("Enter your name: ")
+        else:
+            pass
+    
+    # comment based on the season
+    
+    "A gentle breeze caresses the dry, brittle air respite from the tendrils of enduring heat ever since dryseason began."
+    
+    "You can still remember the events of a few days ago. Engraved, fresh in your mind...."
+    
+    d "Hello [name]!"
+    
+    d "Welcome to the game!"
+    
+    d "You are a Dinkan pastoralist tending to his village. On the outskirts of your village, you come across a lost cow. You do not know who it belongs to."
+    
+    d "What do you do with this lost cow?"
+    
+    menu:
+        "Keep it for yourself":
+            y "Finders Keepers!"
+            $ choice="take"
+        "Ask around village for information":
+            y "Maybe the villagers will know something."
+            $ choice="ask"
+        "Leave it be":
+            y "Surely its owner will find it eventually."
+            $ choice="leave"
+        "Try to return it to its owner":
+            y "I should return the cow to its owner. But I don't know how..."
+            $ choice="return"
+            
+    "As you start returning to the village, a fellow farmer approaches you."
+    f "Hey there!"
+    
+    f "I think that cow belongs to some Misseriyyan nomads on their dry season migration. I know where they are headed. Let's return it!"
+    show map
+    
+    if choice=="take":
+        y "Oh...okay,if you say so."
+    if choice=="ask":
+        y"Okay, I was just about to ask one of you about this. Good to know."
+    if choice=="leave":
+        y "I see. Let's do so."
+    if choice=="return":
+        y "Good! I was about to do the same thing!"
+    
+     
+    
+    
+    
+    
+
+    return
 
