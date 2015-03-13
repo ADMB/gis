@@ -3,11 +3,13 @@
 # Declare images below this line, using the image statement.
 # eg. image eileen happy = "eileen_happy.png"
 image map="sudanmap.jpg"
+image title="Title.jpg"
 
 # Declare characters used by this game.
 define y = Character("[name]", color="#c8ffc8")
 define d = Character("Default")
 define f=Character("Farmer")
+define s=Character("Stranger")
 
 
 # The game starts here.
@@ -16,6 +18,7 @@ label start:
     # add in char selection later
     
     python:
+        
         name = renpy.input("Enter your name: ")
         i = renpy.input("So, your name is... [name]?")
         
@@ -35,44 +38,74 @@ label start:
     
     d "Welcome to the game!"
     
-    d "You are a Dinkan pastoralist tending to his village. On the outskirts of your village, you come across a lost cow. You do not know who it belongs to."
-    
-    d "What do you do with this lost cow?"
+    d "Are you of the Misseriyya or Ngok Dinka?"
     
     menu:
-        "Keep it for yourself":
-            y "Finders Keepers!"
-            $ choice="take"
-        "Ask around village for information":
-            y "Maybe the villagers will know something."
-            $ choice="ask"
-        "Leave it be":
-            y "Surely its owner will find it eventually."
-            $ choice="leave"
-        "Try to return it to its owner":
-            y "I should return the cow to its owner. But I don't know how..."
-            $ choice="return"
+        "Misseriyya":
+            $ start="miss"
+        "Dinka":
+            $start="dink"
             
-    "As you start returning to the village, a fellow farmer approaches you."
-    f "Hey there!"
+    if start=="dink":
+        
+        d "You are a Dinkan pastoralist tending to his village. On the outskirts of your village, you come across a lost cow. You do not know who it belongs to."
     
-    f "I think that cow belongs to some Misseriyyan nomads on their dry season migration. I know where they are headed. Let's return it!"
-    show map
+        d "What do you do with this lost cow?"
     
-    if choice=="take":
-        y "Oh...okay,if you say so."
-    if choice=="ask":
-        y"Okay, I was just about to ask one of you about this. Good to know."
-    if choice=="leave":
-        y "I see. Let's do so."
-    if choice=="return":
-        y "Good! I was about to do the same thing!"
+        menu:
+            "Keep it for yourself":
+                y "Finders Keepers!"
+                $ choice="take"
+            "Ask around village for information":
+                y "Maybe the villagers will know something."
+                $ choice="ask"
+            "Leave it be":
+                y "Surely its owner will find it eventually."
+                $ choice="leave"
+            "Try to return it to its owner":
+                y "I should return the cow to its owner. But I don't know how..."
+                $ choice="return"
+            
+        "As you start returning to the village, a fellow farmer approaches you."
+        f "Hey there!"
     
-     
+        show map
+        f "I think that cow belongs to some Misseriyyan nomads on their dry season migration. I know where they are headed. Let's return it!"
     
     
+        if choice=="take":
+            y "Oh...okay,if you say so."
+        if choice=="ask":
+            y"Okay, I was just about to ask one of you about this. Good to know."
+        if choice=="leave":
+            y "I see. Let's do so."
+        if choice=="return":
+            y "Good! I was about to do the same thing!"
     
-    
-
-    return
-
+    if start=="miss":
+        
+        d "You are a young Misseriyyan nomad traveling during the dry season migration. Suddenly you learn that one of your cattle is missing."
+        
+        d "How do you react to losing your cattle?"
+        
+        menu:
+            "Inform someone":
+                y "I should inform a leader or someone! Not that our leaders would care..."
+                $choice="inform"
+            "Forget about it":
+                y "It's only one cow.."
+                $choice="forget"
+            "Actively seek out perpetrator":
+                y "Someone must have stolen it! I'm going to get my revenge!"
+                $choice="pursue"
+            "Look around for suspicious activity":
+                y "I must not act too hastily. I'll search for evidence..."
+                $choice="search"
+        
+        "As you return to the village, an unknown man approaches you. You believe he is from the nearby Dinka tribe."
+        
+        "You gaze carefully as he approaches with your cattle."
+        
+        s "Hello...I believe this is yours." 
+        
+        "He returns your cow. Your accept with a look of suspicion in your eyes."
