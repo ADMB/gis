@@ -4,6 +4,10 @@
 # eg. image eileen happy = "eileen_happy.png"
 image map="sudanmap.jpg"
 image title="Title.jpg"
+image quote="Quote.png"
+image quote2="Quote2.png"
+image quote3="Quote3.png"
+image quote4="Quote4.png"
 
 # Declare characters used by this game.
 define y = Character("[name]", color="#c8ffc8")
@@ -45,7 +49,23 @@ label start:
             $ start="miss"
         "Dinka":
             $start="dink"
-            
+    show quote 
+    "press enter"
+    hide quote
+    
+    show quote2 
+    ""
+    hide quote2
+    
+    show quote3 
+    ""
+    hide quote3
+    
+    show quote4 
+    ""
+    hide quote4
+    
+    "Week 1"        
     if start=="dink":
         
         d "You are a Dinkan pastoralist tending to his village. On the outskirts of your village, you come across a lost cow. You do not know who it belongs to."
@@ -109,3 +129,16 @@ label start:
         s "Hello...I believe this is yours." 
         
         "He returns your cow. Your accept with a look of suspicion in your eyes."
+        
+    
+        
+        
+    
+    
+     
+    
+    
+    
+    
+
+    return
