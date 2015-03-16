@@ -17,7 +17,6 @@ image quote4="Quote4.png"
 
 # Declare characters used by this game.
 define y = Character("[name]", color="#c8ffc8")
-define d = Character("Default")
 define f=Character("Farmer")
 define s=Character("Stranger")
 
@@ -30,25 +29,34 @@ label start:
     python:
         
         name = renpy.input("Enter your name: ")
+        
+        # make it so if name not entered then default
+        if name == "":
+            name == "Muhammad"
+            "Reached here" #welp it's not reaching...
+            
         i = renpy.input("So, your name is... [name]?")
+    
         
         # turn into a while false loop?
+        # w/ yes-no options that either sent to asking again or send to tribe selection
         if i == "no":
             y = renpy.input("Enter your name: ")
         else:
             pass
     
+            
     # comment based on the season
     
     "A gentle breeze caresses the dry, brittle air respite from the tendrils of enduring heat ever since dryseason began."
     
     "You can still remember the events of a few days ago. Engraved, fresh in your mind...."
     
-    d "Hello [name]!"
+    "Hello [name]!"
     
-    d "Welcome to the game!"
+    "Welcome to the game!"
     
-    d "Are you of the Misseriyya or Ngok Dinka?"
+    "Are you of the Misseriyya or Ngok Dinka?"
     
     menu:
         "Misseriyya":
@@ -110,9 +118,9 @@ label start:
     
     if start=="miss":
         
-        d "You are a young Misseriyyan nomad traveling during the dry season migration. Suddenly you learn that one of your cattle is missing."
+        "You are a young Misseriyyan nomad traveling during the dry season migration. Suddenly you learn that one of your cattle is missing."
         
-        d "How do you react to losing your cattle?"
+        "How do you react to losing your cattle?"
         
         menu:
             "Inform someone":
