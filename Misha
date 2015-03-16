@@ -23,12 +23,15 @@ define s=Character("Stranger")
 
 # The game starts here.
 label start:
+    # resolution points
+    $ RP = 0
     
     # add in char selection later
     
     python:
         
         name = renpy.input("Enter your name: ")
+        
         
         # make it so if name not entered then default
         if name == "":
@@ -48,21 +51,6 @@ label start:
             
     # comment based on the season
     
-    "A gentle breeze caresses the dry, brittle air respite from the tendrils of enduring heat ever since dryseason began."
-    
-    "You can still remember the events of a few days ago. Engraved, fresh in your mind...."
-    
-    "Hello [name]!"
-    
-    "Welcome to the game!"
-    
-    "Are you of the Misseriyya or Ngok Dinka?"
-    
-    menu:
-        "Misseriyya":
-            $ start="miss"
-        "Dinka":
-            $start="dink"
     show quote 
     "Revenge is barren of itself"
     hide quote
@@ -79,6 +67,22 @@ label start:
     "And its end is despair -- Douglas Horton"
     hide quote4
     
+    "A gentle breeze caresses the dry, brittle air respite from the tendrils of enduring heat ever since dryseason began."
+    
+    "You can still remember the events of a few days ago. Engraved, fresh in your mind...."
+    
+    "Hello [name]!"
+    
+    "Welcome to the game!"
+    
+    "Are you of the Misseriyya or Ngok Dinka?"
+    
+    menu:
+        "Misseriyya":
+            $ start="miss"
+        "Dinka":
+            $start="dink"
+    
     "Week 1"        
     if start=="dink":
         
@@ -90,15 +94,19 @@ label start:
             "Keep it for yourself":
                 y "Finders Keepers!"
                 $ choice="take"
+                $ RP -= 1
             "Ask around village for information":
                 y "Maybe the villagers will know something."
                 $ choice="ask"
+                $ RP += .5
             "Leave it be":
                 y "Surely its owner will find it eventually."
                 $ choice="leave"
+                $ RP += 0
             "Try to return it to its owner":
                 y "I should return the cow to its owner. But I don't know how..."
                 $ choice="return"
+                $ RP += 1
             
         "As you start returning to the village, a fellow farmer approaches you."
         f "Hey there!"
@@ -126,15 +134,19 @@ label start:
             "Inform someone":
                 y "I should inform a leader or someone! Not that our leaders would care..."
                 $choice="inform"
+                $ RP += .5
             "Forget about it":
                 y "It's only one cow.."
                 $choice="forget"
+                $ RP+=0
             "Actively seek out perpetrator":
                 y "Someone must have stolen it! I'm going to get my revenge!"
                 $choice="pursue"
+                $ RP -=1
             "Look around for suspicious activity":
                 y "I must not act too hastily. I'll search for evidence..."
                 $choice="search"
+                $ RP += 1
         
         "As you return to the village, an unknown man approaches you. You believe he is from the nearby Dinka tribe."
         
@@ -144,5 +156,7 @@ label start:
         
         "He returns your cow. Your accept with a look of suspicion in your eyes."
         
+        "You have [RP] RP now."
+        # just for testing purposes
     
         return
